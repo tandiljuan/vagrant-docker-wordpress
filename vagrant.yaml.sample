@@ -1,0 +1,20 @@
+---
+vm:
+    box:
+        name: "bento/ubuntu-22.04"
+        version: "202401.31.0"
+    hostname: "wordpress"
+    network:
+        ip: "192.168.30.30"
+    provider:
+        memory: "4096"
+provision:
+    domain:
+        production: "https://production.domain.com"
+        local: "http://local.domain.com"
+    database:
+        prefix: ""
+        root_pass: "localdbroot"
+        ddbb_name: "localdbname"
+        user_name: "localdbuser"
+        user_pass: "localdbpass"
