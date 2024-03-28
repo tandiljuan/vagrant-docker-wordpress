@@ -91,4 +91,8 @@ Vagrant.configure("2") do |config|
   config.vm.provision "bootstrap", type: "shell" do |s|
     s.path = "provision/bootstrap.sh"
   end
+
+  config.vm.provision "images", type: "shell" do |s|
+    s.path = "provision/images.sh"
+  end
 end
