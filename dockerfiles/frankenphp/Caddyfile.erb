@@ -1,0 +1,21 @@
+{
+	# Disable HTTP->HTTPS
+	# @see https://caddy.community/t/can-i-disable-the-auto-redirect-of-http-to-https/13337/6
+	auto_https disable_redirects
+
+	# Enable FrankenPHP
+	frankenphp
+
+	# Configure when the directive must be executed
+	order php_server before file_server
+}
+
+<%= hash[:domain] %> {
+	root * /app/public
+
+	# Enable compression (optional)
+	#encode zstd br gzip
+
+	# Execute PHP files in the current directory and serve assets
+	php_server
+}
