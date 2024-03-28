@@ -96,4 +96,17 @@ Vagrant.configure("2") do |config|
   config.vm.provision "images", type: "shell" do |s|
     s.path = "provision/images.sh"
   end
+
+  config.vm.provision "database", type: "shell" do |s|
+    s.path = "provision/database.sh"
+    s.env = {
+      :DATABASE_DDBB => "#{settings['provision']['database']['ddbb_name']}",
+      :DATABASE_PASS => "#{settings['provision']['database']['user_pass']}",
+      :DATABASE_ROOT => "#{settings['provision']['database']['root_pass']}",
+      :DATABASE_USER => "#{settings['provision']['database']['user_name']}",
+      :DOMAIN_NEW => "#{settings['provision']['domain']['local']}",
+      :DOMAIN_OLD => "#{settings['provision']['domain']['production']}",
+      :PREFIX => "#{settings['provision']['database']['prefix']}",
+    }
+  end
 end
