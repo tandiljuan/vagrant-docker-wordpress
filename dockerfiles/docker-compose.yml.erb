@@ -1,0 +1,46 @@
+---
+# --------------------------------------
+# List of services
+# ----------------
+services:
+    wordpress:
+        image: frankenphp/wordpress
+        restart: always
+        ports:
+            - 80:80
+        environment:
+            WORDPRESS_DB_HOST: db
+            WORDPRESS_DB_USER: <%= hash[:user_name] %>
+            WORDPRESS_DB_PASSWORD: <%= hash[:user_pass] %>
+            WORDPRESS_DB_NAME: <%= hash[:ddbb_name] %>
+            WORDPRESS_REDIS_HOST: redis
+        volumes:
+            - /home/vagrant/dockerfiles/frankenphp/Caddyfile:/etc/caddy/Caddyfile
+            - wordpress:/app/public
+    db:
+        image: mariadb:10.11
+        restart: always
+        environment:
+            MARIADB_ROOT_PASSWORD: <%= hash[:root_pass] %>
+            MARIADB_DATABASE: <%= hash[:ddbb_name] %>
+            MARIADB_USER: <%= hash[:user_name] %>
+            MARIADB_PASSWORD: <%= hash[:user_pass] %>
+        volumes:
+            - db:/var/lib/mysql:Z
+    redis:
+        image: redis:7.2-bookworm
+        restart: always
+# --------------------------------------
+# List of volumes
+# ---------------
+volumes:
+    wordpress:
+        driver_opts:
+            device: /home/vagrant/wordpress
+            o: bind
+            type: none
+    db:
+        driver_opts:
+            device: /opt/wordpress-database
+            o: bind
+            type: none
