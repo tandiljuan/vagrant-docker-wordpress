@@ -127,4 +127,11 @@ Vagrant.configure("2") do |config|
       :PREFIX => "#{settings['provision']['database']['prefix']}",
     }
   end
+
+  parse('dockerfiles/docker-compose.yml.erb', hash: {
+    :ddbb_name => "#{settings['provision']['database']['ddbb_name']}",
+    :root_pass => "#{settings['provision']['database']['root_pass']}",
+    :user_name => "#{settings['provision']['database']['user_name']}",
+    :user_pass => "#{settings['provision']['database']['user_pass']}",
+  })
 end
