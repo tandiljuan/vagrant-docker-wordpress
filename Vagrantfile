@@ -1,7 +1,20 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
 
+require 'erb'
+require 'ostruct'
 require 'yaml'
+
+# Parse a given erb template with a hash of values
+def parse(from, to: '', hash: {})
+  content = File.read(from)
+  template = ERB.new(content)
+  if to.nil? || to.empty?
+      to = from.gsub(/\.erb$/, '')
+  end
+  content = template.result(OpenStruct.new(hash).instance_eval { binding })
+  File.write(to, content)
+end
 
 settings_file_name = 'vagrant.yaml'
 
