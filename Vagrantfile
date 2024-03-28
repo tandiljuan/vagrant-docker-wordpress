@@ -71,6 +71,7 @@ Vagrant.configure("2") do |config|
   # argument is a set of non-required options.
   config.vm.synced_folder "dockerfiles", "/home/vagrant/dockerfiles"
   config.vm.synced_folder "sql", "/home/vagrant/sql"
+  config.vm.synced_folder "wordpress", "/home/vagrant/wordpress"
 
   # Provider-specific configuration so you can fine-tune various
   # backing providers for Vagrant. These expose provider-specific options.
