@@ -1,4 +1,5 @@
 .vagrant
+dockerfiles/docker-compose.yml
 dockerfiles/frankenphp/Caddyfile
 vagrant.yaml
 wordpress
