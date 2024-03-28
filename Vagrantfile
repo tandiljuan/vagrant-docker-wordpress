@@ -107,6 +107,10 @@ Vagrant.configure("2") do |config|
     s.path = "provision/bootstrap.sh"
   end
 
+  parse('dockerfiles/frankenphp/Caddyfile.erb', hash: {
+    :domain => "#{settings['provision']['domain']['local']}",
+  })
+
   config.vm.provision "images", type: "shell" do |s|
     s.path = "provision/images.sh"
   end
